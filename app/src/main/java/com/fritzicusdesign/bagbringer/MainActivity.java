@@ -84,17 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    // TODO: Add getWeatherForNewCity(String city) here:
-/*    private void getWeatherNewCity(String city){
-
-        RequestParams params = new RequestParams();
-        params.put("q", city);
-        params.put("appid", APP_ID);
-        letsDoSomeNetworking(params);
-    }*/
-
-    // TODO: Add getWeatherForCurrentLocation() here:
     private void checkCurrentLocation() {
         Log.d("Clima", "Button Pressed, Function Called");
 
@@ -110,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Clima", "longitude is: " + longitude);
                 Log.d("Clima", "latitude is: " + latitude);
 
-                mLocation.setText("lon: " + longitude + "lat :" +latitude);
+                mLocation.setText("lon: " + longitude + "lat :" +latitude + "Speed: " + location.getSpeed());
+
             //    letsDoSomeNetworking(params);
             }
 
@@ -167,5 +157,15 @@ public class MainActivity extends AppCompatActivity {
         if(mLocationManager !=null) mLocationManager.removeUpdates(mLocationListener);
     }
 
+    protected boolean inParkingLot(Location location){
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
 
+        if(latitude > 36.968404 && latitude < 36.969621){
+            if(longitude >  -121.964673 && longitude < -121.963329){
+                return true;
+            }
+        }
+        return false;
+    }
 }
